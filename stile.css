@@ -327,7 +327,7 @@ noscript {
 .theme-list {
   display: grid;
   margin-block: 0;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 19px 0;
   list-style: none;
 }
@@ -368,20 +368,10 @@ noscript {
   height: 23px;
 }
 
-.theme-list strong, .theme-list small {
-  display: block;
-  line-height: 1.4;
-}
-
 .theme-list strong {
   font: 400 25px/1.02 var(--serif);
 }
 
-.theme-list small {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 12px;
-}
 
 .showcase {
   padding-block: 56px 72px;
@@ -583,6 +573,26 @@ a.text-link:hover {
   cursor: default;
 }
 
+.product-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.product-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.product-price-row .button {
+  min-height: 44px;
+  cursor: default;
+}
+
 .catalog-intro {
   overflow: hidden;
   border-bottom: 1px solid var(--line);
@@ -641,10 +651,6 @@ a.text-link:hover {
   text-underline-offset: 3px;
 }
 
-.intro-inner .eyebrow {
-  margin-top: 19px;
-}
-
 .intro-inner h1 {
   margin-block: 9px 12px;
 }
@@ -658,48 +664,6 @@ a.text-link:hover {
   padding-block: 25px 65px;
 }
 
-.catalog-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 16px;
-  margin-bottom: 23px;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.filters a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 42px;
-  padding: 7px 15px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--olive);
-  font-size: 13px;
-  font-weight: 650;
-}
-
-.filters a:hover {
-  border-color: var(--sage);
-}
-
-.filters a[aria-current] {
-  border-color: var(--sage);
-  background: var(--sage);
-  color: #fffdf7;
-}
-
-.result-count {
-  color: var(--muted);
-  font: 600 13px/1.4 var(--sans);
-  letter-spacing: 0;
-}
 
 .lesson-list {
   margin: 0;
@@ -797,11 +761,36 @@ a.text-link:hover {
   .course-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .footer-inner {
+    grid-template-columns: auto 1fr;
+  }
+
+  .footer-inner p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: start;
+  }
 }
 
 @media (max-width: 760px) {
   .header-inner {
-    min-height: 72px;
+    grid-template-columns: 1fr auto;
+    gap: 0 12px;
+    padding-top: 11px;
+  }
+
+  .header-inner .brand {
+    grid-area: 1 / 1;
+  }
+
+  .account-preview {
+    grid-area: 1 / 2;
+  }
+
+  .primary-nav {
+    grid-area: 2 / 1 / 3 / -1;
+    justify-content: center;
   }
 
   .hero {
@@ -831,25 +820,6 @@ a.text-link:hover {
 }
 
 @media (max-width: 540px) {
-  .header-inner {
-    grid-template-columns: 1fr auto;
-    gap: 0 12px;
-    padding-top: 11px;
-  }
-
-  .header-inner .brand {
-    grid-area: 1 / 1;
-  }
-
-  .account-preview {
-    grid-area: 1 / 2;
-  }
-
-  .primary-nav {
-    grid-area: 2 / 1 / 3 / -1;
-    justify-content: center;
-  }
-
   .brand {
     gap: 7px;
   }
@@ -895,10 +865,6 @@ a.text-link:hover {
     font-size: 19px;
   }
 
-  .theme-list small {
-    display: none;
-  }
-
   .course-grid {
     grid-template-columns: 1fr;
   }
@@ -907,27 +873,18 @@ a.text-link:hover {
     padding-bottom: 33px;
   }
 
-  .intro-inner .eyebrow {
-    margin-top: 6px;
-  }
-
-  .catalog-controls {
-    margin-bottom: 15px;
-  }
-
-  .filters a {
-    padding-inline: 11px;
-  }
-
   .footer-inner {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     gap: 12px;
   }
 
   .footer-inner p {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    text-align: start;
+    grid-row: auto;
+  }
+
+  .footer-inner nav {
+    justify-self: start;
+    flex-wrap: wrap;
   }
 }
 

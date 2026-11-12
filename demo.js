@@ -1,37 +1,53 @@
 "use strict";
 
-const themes = [
-  { id: "viso", label: "Viso", name: "Xbxj", icon: "petal", caption: "Xbxjshdn vbxj" },
-  { id: "massaggio", label: "Massaggio", name: "Vbxjshdn", icon: "hands", caption: "Vbskjdn xbxjshdn" },
-  { id: "benessere", label: "Benessere", name: "Xbskjhdn", icon: "leaf", caption: "Xbxjdn vbxjshdn" },
+const navigation = [
+  { page: "home", href: "index.html", label: "Home" },
+  { page: "catalog", href: "catalogo.html", label: "Videocorsi" },
+  { page: "cosmetics", href: "cosmetici.html", label: "Cosmetici" },
 ];
 
 const courses = [
   {
-    id: "rituale-viso-essenziale",
-    theme: themes[0],
-    title: "Xbxjshdn vbxjshdn",
-    summary: "Xbxjshdn vbxjdn xbxjshdn vbskjdh. Xbxjhdn vbxj xbxjshdn.",
-    image: "assets/viso.jpg",
-    lessonCount: 5,
+    id: "massaggio-in-gravidanza",
+    title: "Massaggio in gravidanza",
+    image: "assets/massaggio-gravidanza-foto.jpg",
   },
   {
-    id: "massaggio-distensivo",
-    theme: themes[1],
-    title: "Vbskjdn xbxjshdn",
-    summary: "Vbxjshdn xbxjdn vbskjdh xbxj. Xbxjshdn vbxjdn xbxjhdn.",
-    image: "assets/massaggio.jpg",
-    lessonCount: 6,
+    id: "massaggio-hot-stone",
+    title: "Massaggio hot stone",
+    image: "assets/massaggio-hot-stone-foto.jpg",
   },
   {
-    id: "rituali-di-benessere",
-    theme: themes[2],
-    title: "Xbskjhdn vbxjdn",
-    summary: "Xbskjhdn vbxjshdn xbxjdn vbskjdh. Vbxjdn xbxjshdn xbxj.",
-    image: "assets/rituali.jpg",
-    lessonCount: 4,
+    id: "maderoterapia",
+    title: "Maderoterapia",
+    image: "assets/maderoterapia-foto.jpg",
+  },
+  {
+    id: "massaggio-anticellulite",
+    title: "Massaggio anticellulite",
+    image: "assets/massaggio-anticellulite-foto.jpg",
+  },
+  {
+    id: "massaggio-relax",
+    title: "Massaggio relax",
+    image: "assets/massaggio-relax-foto.jpg",
   },
 ];
+
+const products = [
+  {
+    title: "Xbxjshdn vbxj",
+    image: "assets/cosmetici-crema-foto.jpg",
+    alt: "Barattolo di crema su un asciugamano",
+  },
+  {
+    title: "Vbxjshdn xbxj",
+    image: "assets/cosmetici-olio-foto.jpg",
+    alt: "Flacone cosmetico in vetro ambrato",
+  },
+];
+
+const summaryPlaceholder = "Xbxjshdn vbxjdn xbxjshdn vbskjdh. Xbxjhdn vbxj xbxjshdn.";
 
 const detailPlaceholder = "Xbxjshdn vbxjdn xbxjshdn vbskjdh. Vbxjshdn xbxjdn vbskjdh xbxjshdn. Xbskjhdn vbxjshdn xbxjdn vbxj.";
 
@@ -42,8 +58,6 @@ const drawings = {
   film: '<rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/>',
   clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/>',
   leaf: '<path d="M4 20c0-5 2-10 8-13 3-2 6-2 8-3-.2 8-4 14-12 14M4 20c3-5 6-8 11-10"/>',
-  petal: '<path d="M12 20c-5-3-6-9 0-16 6 7 5 13 0 16Zm0 0C6 20 3 16 3 10c5 0 8 4 9 10Zm0 0c6 0 9-4 9-10-5 0-8 4-9 10Z"/>',
-  hands: '<path d="M3 14.5 6 13l4 1.3h4a1.5 1.5 0 0 1 0 3h-3m4.5-.7 3.5-2.3a1.5 1.5 0 0 1 2 2.1l-5.7 4H9L3 18.5m9-7.5c-3-2-4.5-3.3-4.5-5a2.4 2.4 0 0 1 4.5-1.3A2.4 2.4 0 0 1 16.5 6c0 1.7-1.5 3-4.5 5Z"/>',
 };
 
 function icon(name) {
@@ -66,15 +80,17 @@ function botanical() {
   </svg>`;
 }
 
+function navigationLinks(page) {
+  return navigation.map((item) => {
+    const current = item.page === page ? ' aria-current="page"' : "";
+    return `<a href="${item.href}"${current}>${item.label}</a>`;
+  }).join("");
+}
+
 function header(page) {
-  const homeState = page === "home" ? ' aria-current="page"' : "";
-  const catalogState = page === "catalog" ? ' aria-current="page"' : "";
   return `<div class="shell header-inner">
     ${brand()}
-    <nav class="primary-nav" aria-label="Navigazione principale">
-      <a href="index.html" aria-label="Home"${homeState}>Xbxj</a>
-      <a href="catalogo.html" aria-label="Videocorsi"${catalogState}>Xbxjshdn</a>
-    </nav>
+    <nav class="primary-nav" aria-label="Navigazione principale">${navigationLinks(page)}</nav>
     <span class="account-preview">Accedi / Registrati</span>
   </div>`;
 }
@@ -82,20 +98,17 @@ function header(page) {
 function footer() {
   return `<div class="shell footer-inner">
     ${brand()}
-    <p>Xbxjshdn vbxjdn<br><span>Xbxjshdn vbxjdn vbskjdh xbxjshdn.</span></p>
-    <nav aria-label="Navigazione a piè di pagina">
-      <a href="index.html" aria-label="Home">Xbxj</a>
-      <a href="catalogo.html" aria-label="Videocorsi">Xbxjshdn</a>
-    </nav>
+    <p>Xbxjshdn vbxjdn<br><span><a href="https://github.com/onitproductionita-design/aurea-demo/blob/main/CREDITI-FOTO.md">Crediti fotografici</a></span></p>
+    <nav aria-label="Navigazione a piè di pagina">${navigationLinks()}</nav>
   </div>`;
 }
 
 function courseCard(course) {
   return `<article class="course-card" aria-labelledby="titolo-${course.id}">
-    <button class="card-media" type="button" aria-label="Dettagli del corso ${course.theme.label}"
+    <button class="card-media" type="button" aria-label="Dettagli del corso ${course.title}"
       aria-expanded="false" aria-controls="dettagli-${course.id}">
       <img src="${course.image}" width="1200" height="800" alt="" loading="lazy">
-      <span class="topic-tag">${course.theme.name}</span>
+      <span class="topic-tag">Massaggio</span>
     </button>
     <div class="card-copy">
       <div class="card-meta">
@@ -103,7 +116,7 @@ function courseCard(course) {
         <span>${icon("clock")}Vbxjdn</span>
       </div>
       <h3 id="titolo-${course.id}">${course.title}</h3>
-      <p class="card-summary">${course.summary}</p>
+      <p class="card-summary">${summaryPlaceholder}</p>
       <details id="dettagli-${course.id}" class="course-details" name="videocorsi">
         <summary class="card-bottom" aria-label="Maggiori dettagli">
           <span class="card-price"><small>Xbxjshdn</small>XX</span>
@@ -117,7 +130,7 @@ function courseCard(course) {
           <p>${detailPlaceholder}</p>
           <h4>Xbxjshdn vbxjdn</h4>
           <ol class="lesson-list">
-            ${Array.from({ length: course.lessonCount }, (_, index) => `<li>
+            ${Array.from({ length: 4 }, (_, index) => `<li>
               <span class="lesson-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
               <span>Xbxjshdn vbxjdn</span><span class="lesson-duration">Xbxj</span>
             </li>`).join("")}
@@ -125,6 +138,22 @@ function courseCard(course) {
           <button class="button purchase-preview" type="button" disabled>Paga ora ${icon("arrow")}</button>
         </div>
       </details>
+    </div>
+  </article>`;
+}
+
+function productCard(product) {
+  return `<article class="course-card product-card">
+    <div class="card-media">
+      <img src="${product.image}" alt="${product.alt}" loading="lazy">
+    </div>
+    <div class="card-copy">
+      <h3>${product.title}</h3>
+      <p class="card-summary">${summaryPlaceholder}</p>
+      <div class="product-price-row">
+        <span class="card-price">XX</span>
+        <button class="button" type="button" disabled>Paga ora ${icon("arrow")}</button>
+      </div>
     </div>
   </article>`;
 }
@@ -141,64 +170,59 @@ function homePage() {
       </div>
     </div>
     <div class="hero-media">
-      <img src="assets/hero.jpg" width="1500" height="1000" alt="Fotografia dimostrativa di un trattamento viso in un ambiente dai toni crema" fetchpriority="high">
+      <img src="assets/hero-fotografia.jpg" width="1400" height="933" alt="Fotografia dimostrativa di un trattamento viso in un ambiente dai toni crema" fetchpriority="high">
     </div>
   </section>
-  <nav class="themes" aria-label="Esplora per tema">
+  <nav class="themes" aria-label="Esplora il sito">
     <ul class="shell theme-list">
-      ${themes.map((theme) => `<li><a href="catalogo.html?tema=${theme.id}" aria-label="${theme.label}">
-        <span class="theme-icon">${icon(theme.icon)}</span>
-        <span><strong>${theme.name}</strong><small>${theme.caption}</small></span>
-      </a></li>`).join("")}
+      <li><a href="catalogo.html">
+        <span class="theme-icon">${icon("film")}</span>
+        <strong>Videocorsi</strong>
+      </a></li>
+      <li><a href="cosmetici.html">
+        <span class="theme-icon">${icon("leaf")}</span>
+        <strong>Cosmetici</strong>
+      </a></li>
     </ul>
   </nav>
   <section class="shell showcase" aria-labelledby="showcase-title">
     <div class="section-heading">
-      <div><p class="eyebrow"><span></span>Xbxjshdn</p><h2 id="showcase-title">Xbxjshdn vbxjshdn</h2></div>
+      <div><p class="eyebrow"><span></span>Xbxjshdn</p><h2 id="showcase-title">Videocorsi</h2></div>
       <a class="text-link all-courses" href="catalogo.html" aria-label="Tutti i videocorsi">Xbxjshdn vbxjdn ${icon("arrow")}</a>
     </div>
     <div class="course-grid">${courses.map(courseCard).join("")}</div>
   </section>`;
 }
 
-function catalogPage(themeId) {
-  const selectedTheme = themes.find((theme) => theme.id === themeId);
-  const visibleCourses = selectedTheme ? courses.filter((course) => course.theme === selectedTheme) : courses;
+function collectionPage(page) {
+  const isCosmetics = page === "cosmetics";
+  const title = isCosmetics ? "Cosmetici" : "Videocorsi";
+  const cards = isCosmetics ? products.map(productCard) : courses.map(courseCard);
   return `<section class="catalog-intro" aria-labelledby="catalog-title">
     <div class="shell intro-inner">
       ${botanical()}
       <nav class="breadcrumbs" aria-label="Percorso di navigazione">
-        <ol><li><a href="index.html" aria-label="Home">Xbxj</a></li><li>${icon("chevron")}<span aria-current="page">Xbxjshdn</span></li></ol>
+        <ol><li><a href="index.html">Home</a></li><li>${icon("chevron")}<span aria-current="page">${title}</span></li></ol>
       </nav>
-      <p class="eyebrow"><span></span>Xbxjshdn vbxjdn</p>
-      <h1 id="catalog-title">Xbxjshdn <em>vbxjshdn</em></h1>
-      <p>Xbxjshdn vbxjdn xbxjshdn vbskjdh xbxj. Vbxjshdn xbxjdn vbskjdh xbxjshdn.</p>
+      <h1 id="catalog-title"><em>${title}</em></h1>
+      <p>${summaryPlaceholder}</p>
     </div>
   </section>
-  <section class="shell catalog-list" aria-labelledby="result-title">
-    <div class="catalog-controls">
-      <nav class="filters" aria-label="Filtra i videocorsi per tema">
-        <a href="catalogo.html" aria-label="Tutti"${selectedTheme ? "" : ' aria-current="page"'}>Xbxj</a>
-        ${themes.map((theme) => `<a href="catalogo.html?tema=${theme.id}" aria-label="${theme.label}"${theme === selectedTheme ? ' aria-current="page"' : ""}>${theme.name}</a>`).join("")}
-      </nav>
-      <h2 id="result-title" class="result-count">Xbxjshdn vbxjdn</h2>
-    </div>
-    <div class="course-grid">${visibleCourses.map(courseCard).join("")}</div>
-  </section>`;
+  <div class="shell catalog-list">
+    <div class="course-grid${isCosmetics ? " product-grid" : ""}">${cards.join("")}</div>
+  </div>`;
 }
 
 const page = document.body.dataset.page;
-const params = new URLSearchParams(window.location.search);
 const main = document.getElementById("contenuto");
 document.getElementById("intestazione").innerHTML = header(page);
 document.getElementById("piè-di-pagina").innerHTML = footer();
 
-const content = page === "catalog" ? catalogPage(params.get("tema")) : homePage();
+const content = page === "home" ? homePage() : collectionPage(page);
 main.innerHTML = content;
 
-for (const card of main.querySelectorAll(".course-card")) {
-  const cover = card.querySelector(".card-media");
-  const details = card.querySelector(".course-details");
+for (const details of main.querySelectorAll(".course-details")) {
+  const cover = details.closest(".course-card").querySelector(".card-media");
   cover.addEventListener("click", () => {
     details.open = !details.open;
     if (details.open) {
