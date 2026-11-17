@@ -91,7 +91,7 @@ function header(page) {
   return `<div class="shell header-inner">
     ${brand()}
     <nav class="primary-nav" aria-label="Navigazione principale">${navigationLinks(page)}</nav>
-    <a class="account-preview" href="accedi.html"${page === "access" ? ' aria-current="page"' : ""}>Accedi / Registrati</a>
+    <a class="account-preview" href="https://aurea-web-production.up.railway.app/accedi/"${page === "access" ? ' aria-current="page"' : ""}>Accedi / Registrati</a>
   </div>`;
 }
 
