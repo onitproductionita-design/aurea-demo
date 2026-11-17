@@ -91,7 +91,7 @@ function header(page) {
   return `<div class="shell header-inner">
     ${brand()}
     <nav class="primary-nav" aria-label="Navigazione principale">${navigationLinks(page)}</nav>
-    <span class="account-preview">Accedi / Registrati</span>
+    <a class="account-preview" href="accedi.html"${page === "access" ? ' aria-current="page"' : ""}>Accedi / Registrati</a>
   </div>`;
 }
 
@@ -218,8 +218,9 @@ const main = document.getElementById("contenuto");
 document.getElementById("intestazione").innerHTML = header(page);
 document.getElementById("piè-di-pagina").innerHTML = footer();
 
-const content = page === "home" ? homePage() : collectionPage(page);
-main.innerHTML = content;
+if (page !== "access") {
+  main.innerHTML = page === "home" ? homePage() : collectionPage(page);
+}
 
 for (const details of main.querySelectorAll(".course-details")) {
   const cover = details.closest(".course-card").querySelector(".card-media");

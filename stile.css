@@ -893,3 +893,116 @@ a.text-link:hover {
     transition: none !important;
   }
 }
+
+a.account-preview:hover,
+a.account-preview[aria-current] {
+  border-color: var(--sage);
+  color: var(--olive);
+}
+
+.access-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  gap: 18px;
+  align-items: start;
+  padding-block: 26px 60px;
+}
+
+.access-option {
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--linen);
+}
+
+.access-option summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: clamp(15px, 2.5vw, 25px);
+  border-radius: inherit;
+  cursor: pointer;
+  list-style: none;
+}
+
+.access-option summary::-webkit-details-marker {
+  display: none;
+}
+
+.access-option summary strong {
+  display: block;
+  font: 400 clamp(1.6rem, 3vw, 2rem)/1.15 var(--serif);
+}
+
+.access-option summary span span,
+.access-course p,
+.access-list dd {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.access-option summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border: solid var(--sage);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+
+.access-option[open] summary::after {
+  transform: rotate(225deg);
+}
+
+.access-panel {
+  display: grid;
+  gap: 22px;
+  padding: clamp(15px, 2.5vw, 25px);
+  border-top: 1px solid var(--line);
+}
+
+.access-panel h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.access-course {
+  display: grid;
+  grid-template-columns: minmax(70px, 110px) minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.access-course img {
+  aspect-ratio: 1.5;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}
+
+.access-course h3 {
+  font-size: 1.3rem;
+}
+
+.access-list {
+  margin: 0;
+}
+
+.access-list > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3px 12px;
+  padding-block: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.access-list dd {
+  margin: 0;
+}
+
+@media (max-width: 420px) {
+  .access-list > div {
+    grid-template-columns: 1fr;
+  }
+}
